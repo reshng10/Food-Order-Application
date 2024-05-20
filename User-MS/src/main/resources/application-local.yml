@@ -1,13 +1,16 @@
-server:
-  port: 9093
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 spring:
-  profiles:
-    active: dev
   application:
     name: User-MS
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3310/userdb
+    username: root
+    password: root
 
   jpa:
     hibernate:

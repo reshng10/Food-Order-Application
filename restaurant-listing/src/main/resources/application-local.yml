@@ -1,16 +1,20 @@
-server:
-  port: 9093
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
 
 spring:
-  profiles:
-    active: dev
-  application:
-    name: User-MS
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/restaurantdb
+    username: root
+    password: root
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+

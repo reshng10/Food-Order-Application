@@ -7,14 +7,17 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-    @Entity
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public class Users {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
         private int userId;
         private String userName;
         private String userPassword;

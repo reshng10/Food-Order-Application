@@ -9,7 +9,7 @@ import {  API_URL_Order, K8ExternalIp } from 'src/app/constants/url';
 
 export class OrderService {
 
-  private apiUrl = API_URL_Order +'/order/addOrder';
+  private apiUrl = K8ExternalIp +'/order/addOrder';
 
   constructor(private http: HttpClient) { }
 

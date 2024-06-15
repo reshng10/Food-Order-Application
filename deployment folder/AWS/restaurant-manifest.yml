@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: restaurantapp
+   labels:
+      app: restaurantapp
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: restaurantapp
+   template:
+      metadata:
+         labels:
+            app: restaurantapp
+      spec:
+         containers:
+            - name: restaurantapp
+              image: 73768582/restaurant-ms:working2
+              imagePullPolicy: Always
+              ports:
+                 - containerPort: 9091
+              env: # Environment variables supplied to the Pod
+                 - name: SPRING_DATASOURCE_USERNAME # name of environment variable
+                   valueFrom: # get value of environment variable from kubernetes secrets
+                      secretKeyRef:
+                         name: secret
+                         key: mysql-username
+                 - name: SPRING_DATASOURCE_PASSWORD
+                   valueFrom:
+                      secretKeyRef:
+                         name: secret
+                         key: mysql-password
+                 - name: SPRING_DATASOURCE_URL
+                   valueFrom:
+                      configMapKeyRef:
+                         name: configmap
+                         key: restaurantdb_url
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: restaurant-service
+spec:
+   selector:
+      app: restaurantapp
+   ports:
+      - protocol: TCP
+        port: 9091
+        targetPort: 9091
+        
+                  
+                    
+                    
+              
+            
+              
+
